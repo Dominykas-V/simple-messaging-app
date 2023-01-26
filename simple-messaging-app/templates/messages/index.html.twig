@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TMessages index{% endblock %}
+
+{% block body %}
+    <h1>TMessages index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Message</th>
+                <th>Created</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for t_message in t_messages %}
+            <tr>
+                <td>{{ t_message.id }}</td>
+                <td>{{ t_message.name }}</td>
+                <td>{{ t_message.message }}</td>
+                <td>{{ t_message.created ? t_message.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_messages_show', {'id': t_message.id}) }}">show</a>
+                    <a href="{{ path('app_messages_edit', {'id': t_message.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_messages_new') }}">Create new</a>
+{% endblock %}
